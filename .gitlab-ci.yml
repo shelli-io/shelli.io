@@ -1,8 +1,5 @@
 image: node:9.2.1
 
-variables:
-  NODE_ENV: production
-
 before_script:
   - npm install
 
