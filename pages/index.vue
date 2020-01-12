@@ -31,10 +31,9 @@ export default {
 .title {
   font-family: 'Heebo', sans-serif;
   display: block;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 100px;
   color: #35495e;
-  letter-spacing: 1px;
 }
 
 .subtitle {
