@@ -1,41 +1,25 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        shelli.io
-      </h1>
-      <h2 class="subtitle">
-        My fantastic Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <img class="logo" src="@/assets/shelli-logo.svg" />
+
+      <h1 class="title">shelli</h1>
+      <h2 class="subtitle">economy as a service</h2>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  }
+  components: {}
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Heebo|Open+Sans&display=swap');
+
 .container {
+  font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -45,8 +29,7 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Heebo', sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
@@ -62,7 +45,7 @@ export default {
   padding-bottom: 15px;
 }
 
-.links {
-  padding-top: 15px;
+.logo {
+  height: 15vh;
 }
 </style>
