@@ -1,0 +1,21 @@
+image: node:9.2.1
+
+variables:
+  NODE_ENV: production
+
+before_script:
+  - npm
+
+cache:
+  paths:
+    - node_modules/
+
+pages:
+  stage: deploy
+  script:
+    - npm generate
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
