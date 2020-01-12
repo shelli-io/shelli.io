@@ -13,7 +13,7 @@ cache:
 pages:
   stage: deploy
   script:
-    - npm generate
+    - npm run generate
   artifacts:
     paths:
       - public
