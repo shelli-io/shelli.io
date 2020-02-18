@@ -4,7 +4,7 @@
       <img class="logo" src="@/assets/shelli-logo.svg" />
 
       <h1 class="title">shelli</h1>
-      <h2 class="subtitle">economy as a service</h2>
+      <h2 class="subtitle">Accounting as a Service</h2>
     </div>
   </div>
 </template>
