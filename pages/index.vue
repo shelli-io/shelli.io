@@ -1,17 +1,22 @@
 <template>
   <div class="container">
-    <div>
+    <div class="section hero">
       <img class="logo" src="@/assets/shelli-logo.svg" />
 
       <h1 class="title">shelli</h1>
       <h2 class="subtitle">Accounting as a Service</h2>
     </div>
+    <div class="section demo">
+      <h2 class="subtitle">IOTA Invoice Demonstrator</h2>
+      <InvoiceForm />
+    </div>
   </div>
 </template>
 
 <script>
+import InvoiceForm from '@/components/InvoiceForm'
 export default {
-  components: {}
+  components: { InvoiceForm }
 }
 </script>
 
@@ -22,10 +27,19 @@ export default {
   font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 100%;
+}
+
+.section {
+  height: 100vh;
+  width: 100%;
+}
+
+.hero {
+  margin-top: 30%;
 }
 
 .title {
