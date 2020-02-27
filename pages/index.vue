@@ -8,6 +8,10 @@
     </div>
     <div class="section demo">
       <h2 class="subtitle">IOTA Invoice Demonstrator</h2>
+      <p>
+        Creates an invoice PDF and add Proof of Existense within the Tangle.
+      </p>
+      <br />
       <InvoiceForm />
     </div>
   </div>
@@ -15,6 +19,7 @@
 
 <script>
 import InvoiceForm from '@/components/InvoiceForm'
+
 export default {
   components: { InvoiceForm }
 }
