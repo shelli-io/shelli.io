@@ -15,7 +15,7 @@
     "test:unit": "cross-env TEST=unit ava --config unit.config.js",
     "test:e2e": "cross-env TEST=e2e ava --config e2e.config.js",
     "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy:gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "deploy:gh-pages": "push-dir --dir=public --branch=gh-pages --cleanup",
     "deploy": "npm run generate:gh-pages && npm run deploy:gh-pages"
   },
   "lint-staged": {
