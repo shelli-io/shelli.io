@@ -9,7 +9,7 @@
     <div class="section demo">
       <h2 class="subtitle">IOTA Invoice Demonstrator</h2>
       <p>
-        Creates an invoice PDF and add Proof of Existense within the Tangle.
+        Creates an invoice PDF and adds Proof of Existence within the Tangle.
       </p>
       <br />
       <InvoiceForm />
