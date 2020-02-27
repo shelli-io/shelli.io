@@ -156,17 +156,19 @@ export default {
 
         const pdfName = 'test'
         const doc = new JsPDF({
-          orientation: 'landscape',
-          unit: 'mm',
-          format: [297, 210]
+          orientation: 'landscape'
         })
 
         console.log('doc', doc)
+        // TODO: FIX THIS
         const source = window.document.getElementById('invoice')
         console.log('source', source)
 
         // doc.fromHTML(source, 15, 15, {})
-        doc.text('Hello World')
+        // TODO: END
+
+        const text = `Hello World, IOTA Price: ${this.current_iota_price}`
+        doc.text(text, 20, 20)
 
         doc.setProperties({
           title: 'shelli invoice',
