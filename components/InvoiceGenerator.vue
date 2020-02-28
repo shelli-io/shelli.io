@@ -88,10 +88,10 @@
     </div>
 
     <el-form-item>
+      <el-button @click="resetForm('form')">Reset</el-button>
       <el-button @click="submitForm('form')" type="primary"
         >Create invoice</el-button
       >
-      <el-button @click="resetForm('form')">Reset</el-button>
     </el-form-item>
     <pre>Loading: {{ loading }}</pre>
   </el-form>
