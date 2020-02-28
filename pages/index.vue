@@ -6,7 +6,7 @@
       <br />
       <br />
       <router-link class="discover" to="services">
-        Discorver Demos
+        Discover Demos
       </router-link>
     </div>
   </div>
