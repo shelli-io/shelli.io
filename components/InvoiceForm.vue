@@ -156,7 +156,7 @@ export default {
 
         const pdfName = 'test'
         const doc = new JsPDF({
-          orientation: 'landscape'
+          orientation: 'portrait'
         })
 
         console.log('doc', doc)
