@@ -5,23 +5,16 @@
 
       <h1 class="title">shelli</h1>
       <h2 class="subtitle">Accounting as a Service</h2>
-    </div>
-    <div class="section demo">
-      <h2 class="subtitle">IOTA Invoice Demonstrator</h2>
-      <p>
-        Creates an invoice PDF and adds Proof of Existence within the Tangle.
-      </p>
-      <br />
-      <InvoiceForm />
+      <router-link to="services">
+        Discorver Demos
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import InvoiceForm from '@/components/InvoiceForm'
-
 export default {
-  components: { InvoiceForm }
+  components: {}
 }
 </script>
 

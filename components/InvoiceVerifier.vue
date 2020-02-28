@@ -2,7 +2,7 @@
   <div>
     <h3>Please add your invoice data to be verified</h3>
 
-    <el-form label-position="top" label-width="100px" :model="form">
+    <el-form :model="form" label-position="top" label-width="100px">
       <el-form-item label="Select your file">
         <dropzone
           id="foo"
@@ -18,7 +18,9 @@
       <el-form-item label="Transaction Hash">
         <el-input v-model="form.tx_hash"></el-input>
       </el-form-item>
-      <el-button @click="checkInvoice" type="primary">Check invoice</el-button>
+      <el-button @click="checkInvoice" type="primary"
+        >Validate invoice</el-button
+      >
     </el-form>
   </div>
 </template>
