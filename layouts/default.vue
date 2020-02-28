@@ -157,13 +157,13 @@ p {
 }
 :root {
   --primary: #5b5048;
-  --primary-darken: #03a3af;
+  --primary-darken: #433b35;
   --secondary: #0b5d9e;
   --secondary-2: #5ab0b2;
   --dark: #3d4449;
   --darker: #0f3535;
   --gray: #e2e2e2;
-  --light: #efefef;
+  --light: #ede7d5;
   --white: #ffffff;
   --white_5: rgba(255, 255, 255, 0.05);
   --white_10: rgba(255, 255, 255, 0.1);
@@ -196,6 +196,7 @@ p {
   color: var(--white) !important;
   &:hover {
     background-color: var(--primary-darken) !important;
+    color: var(--light) !important;
   }
 }
 button.el-button.el-button--light {
