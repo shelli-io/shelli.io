@@ -1,11 +1,12 @@
 <template>
   <div class="services">
-    <h1 class="title">Demo Services</h1>
+    <h1 class="title">Services</h1>
     <el-tabs v-model="activeName" @tab-click="handleClick" class="tabs">
       <el-tab-pane class="tab-pane" label="Invoice Generator" name="first">
         <h2>IOTA Invoice Demonstrator</h2>
         <p class="description">
-          Creates an invoice PDF and adds Proof of Existence within the Tangle.
+          Creates an invoice PDF and adds Proof of Existence within the IOTA
+          Tangle.
         </p>
 
         <InvoiceGenerator />
@@ -13,7 +14,7 @@
       <el-tab-pane class="tab-pane" label="Invoice Verifier" name="second">
         <h2>IOTA Invoice Verifier</h2>
         <p class="description">
-          Verifies an invoice PDF Proof of Existence within the Tangle.
+          Verifies an invoice PDF Proof of Existence within the IOTA Tangle.
         </p>
         <InvoiceVerifier />
       </el-tab-pane>
@@ -45,6 +46,7 @@ export default {
   max-width: 800px;
   padding: 0 20px;
   .title {
+    font-size: 4em;
     margin-top: 80px;
   }
   .tabs {

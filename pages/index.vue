@@ -6,7 +6,7 @@
       <br />
       <br />
       <router-link class="discover" to="services">
-        Discover Demos
+        Discover Demo Services
       </router-link>
     </div>
   </div>
@@ -20,7 +20,7 @@ export default {
 
 <style>
 .container {
-  padding-top: 10%;
+  padding-top: 20%;
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   min-height: 100vh;
