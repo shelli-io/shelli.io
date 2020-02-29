@@ -11,7 +11,7 @@
         <InvoiceGenerator />
       </el-tab-pane>
       <el-tab-pane class="tab-pane" label="Invoice Verifier" name="second">
-        <h2>Invoice Verifier</h2>
+        <h2>IOTA Invoice Verifier</h2>
         <p class="description">
           Verifies an invoice PDF Proof of Existence within the Tangle.
         </p>
