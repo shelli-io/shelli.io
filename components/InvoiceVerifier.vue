@@ -3,7 +3,7 @@
     <h3>Please add your invoice data to be verified</h3>
 
     <el-form :model="form" label-position="top" label-width="100px">
-      <el-form-item label="Select your file">
+      <el-form-item label="Select your invoice PDF">
         <dropzone
           id="foo"
           ref="el"

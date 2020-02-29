@@ -28,7 +28,8 @@ html {
 }
 
 .main {
-  padding-top: 120px;
+  margin: 0 auto;
+  margin-top: 150px;
 }
 
 *,

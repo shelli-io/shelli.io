@@ -1,16 +1,20 @@
 <template>
   <div class="services">
-    <h1>shelli demo services</h1>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="Invoice Generator" name="first">
+    <h1 class="title">Demo Services</h1>
+    <el-tabs v-model="activeName" @tab-click="handleClick" class="tabs">
+      <el-tab-pane class="tab-pane" label="Invoice Generator" name="first">
         <h2>IOTA Invoice Demonstrator</h2>
-        <p>
+        <p class="description">
           Creates an invoice PDF and adds Proof of Existence within the Tangle.
         </p>
+
         <InvoiceGenerator />
       </el-tab-pane>
-      <el-tab-pane label="Invoice Verifier" name="second">
+      <el-tab-pane class="tab-pane" label="Invoice Verifier" name="second">
         <h2>Invoice Verifier</h2>
+        <p class="description">
+          Verifies an invoice PDF Proof of Existence within the Tangle.
+        </p>
         <InvoiceVerifier />
       </el-tab-pane>
     </el-tabs>
@@ -36,4 +40,24 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.services {
+  max-width: 800px;
+  padding: 0 20px;
+  .title {
+    margin-top: 80px;
+  }
+  .tabs {
+    margin-top: 40px;
+    .tab-pane {
+      margin-top: 20px;
+    }
+  }
+  .el-tabs__item {
+    font-size: 1.5em;
+  }
+  .description {
+    margin-bottom: 40px;
+  }
+}
+</style>

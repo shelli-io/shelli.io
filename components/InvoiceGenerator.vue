@@ -355,4 +355,8 @@ export default {
 .rtl table tr td:nth-child(2) {
   text-align: left;
 }
+
+.el-form-item__content {
+  margin-top: 50px;
+}
 </style>
