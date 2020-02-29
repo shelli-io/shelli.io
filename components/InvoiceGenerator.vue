@@ -20,10 +20,10 @@
                   />
                 </td>
 
-                <td contenteditable="true">
-                  Invoice #: 123<br />
-                  Created: February 29, 2020<br />
-                  Due: February 29, 2020
+                <td>
+                  Invoice #: <input v-model="form.invoice_number" /><br />
+                  Created: <input v-model="form.invoice_created_at" /><br />
+                  Due: <input v-model="form.invoice_due_at" />
                 </td>
               </tr>
             </table>
@@ -34,16 +34,24 @@
           <td colspan="4">
             <table>
               <tr>
-                <td contenteditable="true">
-                  shelli, Inc.<br />
-                  39527 Sunny Road<br />
-                  Sunnyville, CA 39527
+                <td>
+                  <p><input v-model="form.company_name" /></p>
+                  <p><input v-model="form.address" /></p>
+                  <p>
+                    <input v-model="form.zip_code" /><input
+                      v-model="form.city"
+                    />
+                  </p>
                 </td>
 
-                <td contenteditable="true">
-                  JD Corp.<br />
-                  John Doe<br />
-                  john@example.com
+                <td>
+                  <p><input v-model="form.receiver.company_name" /></p>
+                  <p><input v-model="form.receiver.address" /></p>
+                  <p>
+                    <input v-model="form.receiver.zip_code" /><input
+                      v-model="form.receiver.city"
+                    />
+                  </p>
                 </td>
               </tr>
             </table>
@@ -89,7 +97,10 @@
 
     <el-form-item>
       <el-button @click="resetForm('form')">Reset</el-button>
-      <el-button @click="submitForm('form')" type="primary"
+      <el-button
+        @click="submitForm('form')"
+        v-loading.fullscreen.lock="loading"
+        type="primary"
         >Create invoice</el-button
       >
     </el-form-item>
@@ -111,7 +122,23 @@ export default {
   data() {
     return {
       loading: false,
-      form: {},
+      form: {
+        company_name: 'shelli, Inc',
+        address: '42 Big Road',
+        zip_code: '39527',
+        city: 'Sunnyville, CA',
+        country: 'USA',
+        invoice_number: 342,
+        invoice_created_at: 'February 29, 2020',
+        invoice_due_at: 'March 9, 2020',
+        receiver: {
+          company_name: 'John Doe Corp',
+          address: '4320  Mount Street',
+          zip_code: '48607',
+          city: 'Saginaw',
+          country: 'USA'
+        }
+      },
       rules: {},
       current_iota_price: null,
       items: [
@@ -137,9 +164,11 @@ export default {
       this.items.push({ description: '', quantity: 1, price: 0 })
     },
     submitForm(formName) {
+      console.log('button pressed')
+      this.loading = true
+      this.$nextTick()
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.loading = true
           this.createPDF()
         } else {
           console.log('error submit!!')
@@ -161,14 +190,11 @@ export default {
 
         console.log('doc', doc)
         // TODO: FIX THIS
-        const source = window.document.getElementById('invoice')
-        console.log('source', source)
+        // const source = window.document.getElementById('invoice')
+        // console.log('source', source)
 
         // doc.fromHTML(source, 15, 15, {})
         // TODO: END
-
-        const text = `Hello World, IOTA Price: ${this.current_iota_price}`
-        doc.text(text, 20, 20)
 
         doc.setProperties({
           title: 'shelli invoice',
@@ -177,6 +203,79 @@ export default {
           keywords: 'generated, javascript,jspdf',
           creator: 'Javascript jsPDF'
         })
+        const fontSizes = {
+          HeadTitleFontSize: 20,
+          Head2TitleFontSize: 18,
+          SubTitleFontSize: 16,
+          NormalFontSize: 15,
+          SmallFontSize: 10
+        }
+
+        doc.setFont('open-sans')
+        doc.setFontSize(fontSizes.NormalFontSize)
+
+        // Invoice Information
+        doc.text(`Invoice #${this.form.invoice_number}`, 190, 36, 'right')
+        doc.text(`Created: ${this.form.invoice_created_at}`, 190, 42, 'right')
+        doc.text(`Due: ${this.form.invoice_due_at}`, 190, 48, 'right')
+
+        // Anschrift
+        doc.text(`${this.form.company_name}`, 20, 68)
+        doc.text(`${this.form.address}`, 20, 74)
+        doc.text(`${this.form.zip_code} ${this.form.city}`, 20, 80)
+
+        doc.text(`${this.form.receiver.company_name}`, 190, 68, 'right')
+        doc.text(`${this.form.receiver.address}`, 190, 74, 'right')
+        doc.text(
+          `${this.form.receiver.zip_code} ${this.form.receiver.city}`,
+          190,
+          80,
+          'right'
+        )
+
+        // Logo bg
+        const img = new Image()
+        img.src = require('@/assets/shelli-bg.png')
+        doc.addImage(img, 'PNG', 0, 0)
+
+        // Logo bg
+        img.src = require('@/assets/logo.png')
+        doc.addImage(img, 'PNG', 20, 30, 25, 25)
+
+        // Payment Method and IOTA Live Data
+        doc.setFontSize(fontSizes.Head2TitleFontSize)
+        doc.text(`Payment Method`, 20, 120)
+        doc.text(`MIOTA Price`, 190, 120, 'right')
+
+        doc.setFontSize(fontSizes.NormalFontSize)
+        doc.text(`IOTA`, 20, 130)
+        doc.text(`${this.current_iota_price} €`, 190, 130, 'right')
+
+        // Items Header
+        doc.setFontSize(fontSizes.Head2TitleFontSize)
+        doc.text(`Item`, 20, 150)
+        doc.text(`Unit Cost`, 120, 150, 'right')
+        doc.text(`Quantity`, 150, 150, 'right')
+        doc.text(`Price`, 190, 150, 'right')
+
+        // Items Header
+        doc.setFontSize(fontSizes.NormalFontSize)
+        let x = 0
+        this.items.forEach((item) => {
+          doc.text(`${item.description}`, 20, 160 + x)
+          doc.text(`${item.price}`, 120, 160 + x, 'right')
+          doc.text(`${item.quantity}`, 150, 160 + x, 'right')
+          doc.text(`${item.price * item.quantity} €`, 190, 160 + x, 'right')
+          x = x + 10
+        })
+
+        // Total
+        doc.setFontSize(fontSizes.Head2TitleFontSize)
+        doc.text(`Total: ${this.total} €`, 190, 160 + x + 10, 'right')
+
+        // Footer
+        doc.setFontSize(fontSizes.SmallFontSize)
+        doc.text(`shelli.io - Accounting as a Service`, 20, 290)
 
         const ab = doc.output('arraybuffer')
         const hash = sha256(ab)
