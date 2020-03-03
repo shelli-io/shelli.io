@@ -3,7 +3,7 @@
     <h3>Please add your invoice data to be verified</h3>
 
     <el-form :model="form" label-position="top" label-width="100px">
-      <el-form-item label="Select your invoice PDF">
+      <el-form-item class="label" label="Select your invoice PDF">
         <dropzone
           id="foo"
           ref="el"
@@ -12,10 +12,10 @@
           v-on:vdropzone-file-added="fileAdded"
         ></dropzone>
       </el-form-item>
-      <el-form-item label="IOTA Address">
+      <el-form-item class="label" label-position="top" label="IOTA Address">
         <el-input v-model="form.address"></el-input>
       </el-form-item>
-      <el-form-item label="Transaction Hash">
+      <el-form-item class="label" label-position="top" label="Transaction Hash">
         <el-input v-model="form.tx_hash"></el-input>
       </el-form-item>
       <el-button @click="checkInvoice" type="primary"
@@ -58,7 +58,7 @@ export default {
     async checkInvoice() {
       console.log('form', this.form)
       const bundle = {
-        provider: 'https://altnodes.devnet.iota.org',
+        provider: 'https://nodes.devnet.thetangle.org:443',
         address: this.form.address,
         hash: this.form.tx_hash
       }
@@ -119,4 +119,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+h3 {
+  margin-bottom: 30px;
+}
+.el-form-item__label {
+  float: left !important;
+  width: 100%;
+  padding: 0 !important;
+}
+</style>
