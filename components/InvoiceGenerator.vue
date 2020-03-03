@@ -76,6 +76,14 @@
           <td colspan="3">IOTA</td>
           <td>{{ current_iota_price }} €</td>
         </tr>
+        IOTA Address:
+        <input
+          v-model="form.iota_address"
+          v-bind:style="{ width: '100%' }"
+          placeholder="Your IOTA address (devnet)"
+        />
+        <br />
+        <br />
 
         <tr class="heading">
           <td>Item</td>
@@ -157,6 +165,8 @@ export default {
         invoice_number: 342,
         invoice_created_at: 'February 29, 2020',
         invoice_due_at: 'March 9, 2020',
+        iota_address:
+          'SHELLIHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLO',
         receiver: {
           company_name: 'John Doe Corp',
           address: '4320  Mount Street',
@@ -226,7 +236,8 @@ export default {
           Head2TitleFontSize: 18,
           SubTitleFontSize: 16,
           NormalFontSize: 15,
-          SmallFontSize: 10
+          SmallFontSize: 10,
+          TinyFontSize: 8
         }
 
         doc.setFont('open-sans')
@@ -264,32 +275,37 @@ export default {
         doc.setFontSize(fontSizes.Head2TitleFontSize)
         doc.text(`Payment Method`, 20, 120)
         doc.text(`MIOTA Price`, 190, 120, 'right')
+        doc.text(`IOTA Address`, 20, 150)
 
         doc.setFontSize(fontSizes.NormalFontSize)
         doc.text(`IOTA`, 20, 130)
         doc.text(`${this.current_iota_price} €`, 190, 130, 'right')
 
+        doc.setFontSize(fontSizes.TinyFontSize)
+        doc.text(`${this.form.iota_address}`, 20, 155)
+        doc.setFontSize(fontSizes.NormalFontSize)
+
         // Items Header
         doc.setFontSize(fontSizes.Head2TitleFontSize)
-        doc.text(`Item`, 20, 150)
-        doc.text(`Unit Cost`, 120, 150, 'right')
-        doc.text(`Quantity`, 150, 150, 'right')
-        doc.text(`Price`, 190, 150, 'right')
+        doc.text(`Item`, 20, 180)
+        doc.text(`Unit Cost`, 120, 180, 'right')
+        doc.text(`Quantity`, 150, 180, 'right')
+        doc.text(`Price`, 190, 180, 'right')
 
         // Items Header
         doc.setFontSize(fontSizes.NormalFontSize)
         let x = 0
         this.items.forEach((item) => {
-          doc.text(`${item.description}`, 20, 160 + x)
-          doc.text(`${item.price}`, 120, 160 + x, 'right')
-          doc.text(`${item.quantity}`, 150, 160 + x, 'right')
-          doc.text(`${item.price * item.quantity} €`, 190, 160 + x, 'right')
+          doc.text(`${item.description}`, 20, 190 + x)
+          doc.text(`${item.price}`, 120, 190 + x, 'right')
+          doc.text(`${item.quantity}`, 150, 190 + x, 'right')
+          doc.text(`${item.price * item.quantity} €`, 190, 190 + x, 'right')
           x = x + 10
         })
 
         // Total
         doc.setFontSize(fontSizes.Head2TitleFontSize)
-        doc.text(`Total: ${this.total} €`, 190, 160 + x + 10, 'right')
+        doc.text(`Total: ${this.total} €`, 190, 190 + x + 10, 'right')
 
         // Footer
         doc.setFontSize(fontSizes.SmallFontSize)
@@ -302,8 +318,7 @@ export default {
         try {
           const seed =
             'EIQLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORL9D'
-          const address =
-            'EIDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD'
+          const address = this.form.iota_address
           const provider = 'https://nodes.devnet.thetangle.org:443'
           const depth = 3
           const minWeightMagnitude = 9 // 14 for Mainnet
