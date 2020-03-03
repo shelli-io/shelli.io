@@ -104,7 +104,15 @@
         >Create invoice</el-button
       >
     </el-form-item>
-    <pre>Loading: {{ loading }}</pre>
+    <div id="result" v-loading="loading">
+      <h2>Your transaction hash</h2>
+      <p>
+        Share this hash with your invoice PDF document, to proof it with the
+        invoice verifier.
+      </p>
+      <p v-if="tx_hash">{{ tx_hash }}</p>
+      <p v-else>Create an invoice first.</p>
+    </div>
   </el-form>
 </template>
 <script>
@@ -142,10 +150,11 @@ export default {
       rules: {},
       current_iota_price: null,
       items: [
-        { description: 'Website design', quantity: 1, price: 300 },
-        { description: 'Website design', quantity: 1, price: 75 },
-        { description: 'Website design', quantity: 1, price: 10 }
-      ]
+        { description: 'Website concept', quantity: 1, price: 900 },
+        { description: 'Website design', quantity: 1, price: 3000 },
+        { description: 'Website deployment', quantity: 1, price: 300 }
+      ],
+      tx_hash: ''
     }
   },
   computed: {
@@ -166,7 +175,6 @@ export default {
     submitForm(formName) {
       console.log('button pressed')
       this.loading = true
-      this.$nextTick()
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.createPDF()
@@ -187,14 +195,6 @@ export default {
         const doc = new JsPDF({
           orientation: 'portrait'
         })
-
-        console.log('doc', doc)
-        // TODO: FIX THIS
-        // const source = window.document.getElementById('invoice')
-        // console.log('source', source)
-
-        // doc.fromHTML(source, 15, 15, {})
-        // TODO: END
 
         doc.setProperties({
           title: 'shelli invoice',
@@ -286,7 +286,7 @@ export default {
             'EIQLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORL9D'
           const address =
             'EIDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD'
-          const provider = 'https://altnodes.devnet.iota.org'
+          const provider = 'https://nodes.devnet.thetangle.org:443'
           const depth = 3
           const minWeightMagnitude = 9 // 14 for Mainnet
           const tag = 'EINFACH9'
@@ -302,6 +302,7 @@ export default {
           }
           const retArr = await this.publish(bundle)
           console.log(`TX Hash=${retArr[0].hash}`)
+          this.tx_hash = retArr[0].hash
           doc.save(pdfName + '.pdf')
         } catch (e) {
           console.log(`something went wrong ${e}`)
@@ -340,15 +341,13 @@ export default {
     },
     getCurrentIOTAPrice() {
       axios.get('https://api.coingecko.com/api/v3/coins/iota').then((res) => {
-        console.log('EUR', res)
-        console.log('EUR', res.data.market_data.current_price.eur)
         this.current_iota_price = res.data.market_data.current_price.eur
       })
     }
   }
 }
 </script>
-<style>
+<style lang="scss">
 .invoice-box {
   max-width: 800px;
   margin: auto;
@@ -457,5 +456,14 @@ export default {
 
 .el-form-item__content {
   margin-top: 50px;
+}
+
+#result {
+  padding: 50px 20px;
+  margin-top: 50px;
+  p {
+    padding: 5px;
+    word-break: break-all;
+  }
 }
 </style>
