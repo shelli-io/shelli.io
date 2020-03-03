@@ -21,9 +21,12 @@
                 </td>
 
                 <td>
-                  Invoice #: <input v-model="form.invoice_number" /><br />
-                  Created: <input v-model="form.invoice_created_at" /><br />
-                  Due: <input v-model="form.invoice_due_at" />
+                  Invoice #:
+                  <input v-model="form.invoice_number" />
+                  <br />Created:
+                  <input v-model="form.invoice_created_at" />
+                  <br />Due:
+                  <input v-model="form.invoice_due_at" />
                 </td>
               </tr>
             </table>
@@ -35,22 +38,28 @@
             <table>
               <tr>
                 <td>
-                  <p><input v-model="form.company_name" /></p>
-                  <p><input v-model="form.address" /></p>
                   <p>
-                    <input v-model="form.zip_code" /><input
-                      v-model="form.city"
-                    />
+                    <input v-model="form.company_name" />
+                  </p>
+                  <p>
+                    <input v-model="form.address" />
+                  </p>
+                  <p>
+                    <input v-model="form.zip_code" />
+                    <input v-model="form.city" />
                   </p>
                 </td>
 
                 <td>
-                  <p><input v-model="form.receiver.company_name" /></p>
-                  <p><input v-model="form.receiver.address" /></p>
                   <p>
-                    <input v-model="form.receiver.zip_code" /><input
-                      v-model="form.receiver.city"
-                    />
+                    <input v-model="form.receiver.company_name" />
+                  </p>
+                  <p>
+                    <input v-model="form.receiver.address" />
+                  </p>
+                  <p>
+                    <input v-model="form.receiver.zip_code" />
+                    <input v-model="form.receiver.city" />
                   </p>
                 </td>
               </tr>
@@ -76,9 +85,13 @@
         </tr>
 
         <tr v-for="(item, index) in items" :key="index" class="item">
-          <td><input v-model="item.description" /></td>
+          <td>
+            <input v-model="item.description" />
+          </td>
           <td><input v-model="item.price" type="number" /> €</td>
-          <td><input v-model="item.quantity" type="number" /></td>
+          <td>
+            <input v-model="item.quantity" type="number" />
+          </td>
           <td>{{ (item.price * item.quantity) | currency }} €</td>
         </tr>
 
@@ -111,7 +124,12 @@
         invoice verifier.
       </p>
       <p v-if="tx_hash">{{ tx_hash }}</p>
-      <p v-else>Create an invoice first.</p>
+      <el-alert
+        v-else
+        :closable="false"
+        title="Create an invoice first."
+        type="warning"
+      ></el-alert>
     </div>
   </el-form>
 </template>
