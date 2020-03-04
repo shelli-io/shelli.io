@@ -4,7 +4,7 @@
 
     <el-form :model="form" label-position="top" label-width="100px">
       <el-form-item class="label" label="Select your invoice PDF">
-        <input type="file" @change="processFile($event)" />
+        <input @change="processFile($event)" type="file" />
       </el-form-item>
       <el-form-item class="label" label-position="top" label="IOTA Address">
         <el-input v-model="form.address"></el-input>
