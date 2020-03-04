@@ -267,7 +267,7 @@ export default {
         img.src = require('@/assets/shelli-bg.png')
         doc.addImage(img, 'PNG', 0, 0)
 
-        // Logo bg
+        // Logo
         img.src = require('@/assets/logo.png')
         doc.addImage(img, 'PNG', 20, 30, 25, 25)
 
