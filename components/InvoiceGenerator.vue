@@ -203,14 +203,7 @@ export default {
     submitForm(formName) {
       console.log('button pressed')
       this.loading = true
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.createPDF()
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+      this.createPDF()
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
