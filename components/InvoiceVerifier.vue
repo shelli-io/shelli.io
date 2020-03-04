@@ -18,10 +18,26 @@
       <el-form-item class="label" label-position="top" label="Transaction Hash">
         <el-input v-model="form.tx_hash"></el-input>
       </el-form-item>
-      <el-button @click="checkInvoice" type="primary"
+      <el-button
+        @click="checkInvoice"
+        v-loading.fullscreen.lock="loading"
+        type="primary"
         >Validate invoice</el-button
       >
     </el-form>
+    <div v-if="result">
+      <h2>Your Result</h2>
+      <div v-if="verified">
+        <el-alert title="The invoice got verified" type="success"> </el-alert>
+      </div>
+      <div v-else>
+        <el-alert
+          title="Could not verifie your invoice. There is something wrong."
+          type="error"
+        >
+        </el-alert>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,13 +56,17 @@ export default {
     return {
       // See https://rowanwins.github.io/vue-dropzone/docs/dist/index.html#/props
       options: {
-        url: 'http://httpbin.org/anything'
+        url: 'http://httpbin.org/anything',
+        maxFiles: 1
       },
       form: {
         address: '',
         tx_hash: ''
       },
-      file: ''
+      file: '',
+      loading: false,
+      verified: null,
+      result: false
     }
   },
   mounted() {
@@ -56,14 +76,18 @@ export default {
   },
   methods: {
     async checkInvoice() {
+      this.loading = true
+      this.result = false
       console.log('form', this.form)
       const bundle = {
         provider: 'https://nodes.devnet.thetangle.org:443',
         address: this.form.address,
         hash: this.form.tx_hash
       }
-      const verified = await this.verify(bundle, this.file)
-      console.log('verified', verified)
+      this.verified = await this.verify(bundle, this.file)
+      console.log('verified', this.verified)
+      this.loading = false
+      this.result = true
     },
 
     fileAdded(file) {
@@ -111,6 +135,7 @@ export default {
       console.log('calculatedHash', calculatedHash)
       let tangleHash = await this.fetchTx(bundle)
       console.log('tangleHash', tangleHash)
+      if (!tangleHash) return 0
       tangleHash = tangleHash.replace(/\0/g, '')
       // tangleHash.replace(/\0/g, '') removes u0000
       return calculatedHash.trim() === tangleHash.trim()
