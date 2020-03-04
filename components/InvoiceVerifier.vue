@@ -4,13 +4,7 @@
 
     <el-form :model="form" label-position="top" label-width="100px">
       <el-form-item class="label" label="Select your invoice PDF">
-        <dropzone
-          id="foo"
-          ref="el"
-          :options="options"
-          :destroyDropzone="true"
-          v-on:vdropzone-file-added="fileAdded"
-        ></dropzone>
+        <input type="file" @change="processFile($event)" />
       </el-form-item>
       <el-form-item class="label" label-position="top" label="IOTA Address">
         <el-input v-model="form.address"></el-input>
@@ -28,37 +22,27 @@
     <div v-if="result">
       <h2>Your Result</h2>
       <div v-if="verified">
-        <el-alert title="The invoice got verified" type="success"> </el-alert>
+        <el-alert title="The invoice got verified" type="success"></el-alert>
       </div>
       <div v-else>
         <el-alert
           title="Could not verifie your invoice. There is something wrong."
           type="error"
-        >
-        </el-alert>
+        ></el-alert>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Dropzone from 'nuxt-dropzone'
-import 'nuxt-dropzone/dropzone.css'
 const { composeAPI } = require('@iota/core')
 const { trytesToAscii } = require('@iota/converter')
 const sha256 = require('js-sha256')
 
 export default {
-  components: {
-    Dropzone
-  },
+  components: {},
   data() {
     return {
-      // See https://rowanwins.github.io/vue-dropzone/docs/dist/index.html#/props
-      options: {
-        url: 'http://httpbin.org/anything',
-        maxFiles: 1
-      },
       form: {
         address: '',
         tx_hash: ''
@@ -69,12 +53,10 @@ export default {
       result: false
     }
   },
-  mounted() {
-    // Everything is mounted and you can access the dropzone instance
-    const instance = this.$refs.el.dropzone
-    console.log('instance', instance)
-  },
   methods: {
+    processFile(event) {
+      this.file = event.target.files[0]
+    },
     async checkInvoice() {
       this.loading = true
       this.result = false
@@ -144,7 +126,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 h3 {
   margin-bottom: 30px;
 }
