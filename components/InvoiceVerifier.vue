@@ -6,9 +6,9 @@
       <el-form-item class="label" label="Select your invoice PDF">
         <input @change="processFile($event)" type="file" />
       </el-form-item>
-      <el-form-item class="label" label-position="top" label="IOTA Address">
+      <!-- <el-form-item class="label" label-position="top" label="IOTA Address">
         <el-input v-model="form.address"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item class="label" label-position="top" label="Transaction Hash">
         <el-input v-model="form.tx_hash"></el-input>
       </el-form-item>
@@ -44,7 +44,8 @@ export default {
   data() {
     return {
       form: {
-        address: '',
+        address:
+          'SHELLIHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLO',
         tx_hash: ''
       },
       file: '',

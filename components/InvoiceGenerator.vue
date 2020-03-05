@@ -66,7 +66,7 @@
             </table>
           </td>
         </tr>
-
+        <!--       
         <tr class="heading">
           <td colspan="3">Payment Method</td>
           <td>MIOTA Price</td>
@@ -83,7 +83,7 @@
           placeholder="Your IOTA address (devnet)"
         />
         <br />
-        <br />
+        <br /> -->
 
         <tr class="heading">
           <td>Item</td>
@@ -264,41 +264,41 @@ export default {
         img.src = require('@/assets/logo.png')
         doc.addImage(img, 'PNG', 20, 30, 25, 25)
 
-        // Payment Method and IOTA Live Data
-        doc.setFontSize(fontSizes.Head2TitleFontSize)
-        doc.text(`Payment Method`, 20, 120)
-        doc.text(`MIOTA Price`, 190, 120, 'right')
-        doc.text(`IOTA Address`, 20, 150)
+        // // Payment Method and IOTA Live Data
+        // doc.setFontSize(fontSizes.Head2TitleFontSize)
+        // doc.text(`Payment Method`, 20, 120)
+        // doc.text(`MIOTA Price`, 190, 120, 'right')
+        // doc.text(`IOTA Address`, 20, 150)
 
-        doc.setFontSize(fontSizes.NormalFontSize)
-        doc.text(`IOTA`, 20, 130)
-        doc.text(`${this.current_iota_price} €`, 190, 130, 'right')
+        // doc.setFontSize(fontSizes.NormalFontSize)
+        // doc.text(`IOTA`, 20, 130)
+        // doc.text(`${this.current_iota_price} €`, 190, 130, 'right')
 
-        doc.setFontSize(fontSizes.TinyFontSize)
-        doc.text(`${this.form.iota_address}`, 20, 155)
-        doc.setFontSize(fontSizes.NormalFontSize)
+        // doc.setFontSize(fontSizes.TinyFontSize)
+        // doc.text(`${this.form.iota_address}`, 20, 155)
+        // doc.setFontSize(fontSizes.NormalFontSize)
 
         // Items Header
         doc.setFontSize(fontSizes.Head2TitleFontSize)
-        doc.text(`Item`, 20, 180)
-        doc.text(`Unit Cost`, 120, 180, 'right')
-        doc.text(`Quantity`, 150, 180, 'right')
-        doc.text(`Price`, 190, 180, 'right')
+        doc.text(`Item`, 20, 120)
+        doc.text(`Unit Cost`, 120, 120, 'right')
+        doc.text(`Quantity`, 150, 120, 'right')
+        doc.text(`Price`, 190, 120, 'right')
 
         // Items Header
         doc.setFontSize(fontSizes.NormalFontSize)
         let x = 0
         this.items.forEach((item) => {
-          doc.text(`${item.description}`, 20, 190 + x)
-          doc.text(`${item.price}`, 120, 190 + x, 'right')
-          doc.text(`${item.quantity}`, 150, 190 + x, 'right')
-          doc.text(`${item.price * item.quantity} €`, 190, 190 + x, 'right')
+          doc.text(`${item.description}`, 20, 130 + x)
+          doc.text(`${item.price}`, 120, 130 + x, 'right')
+          doc.text(`${item.quantity}`, 150, 130 + x, 'right')
+          doc.text(`${item.price * item.quantity} €`, 190, 130 + x, 'right')
           x = x + 10
         })
 
         // Total
         doc.setFontSize(fontSizes.Head2TitleFontSize)
-        doc.text(`Total: ${this.total} €`, 190, 190 + x + 10, 'right')
+        doc.text(`Total: ${this.total} €`, 190, 130 + x + 10, 'right')
 
         // Footer
         doc.setFontSize(fontSizes.SmallFontSize)
