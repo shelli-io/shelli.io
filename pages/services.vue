@@ -18,6 +18,14 @@
         </p>
         <InvoiceVerifier />
       </el-tab-pane>
+      <el-tab-pane class="tab-pane" label="Price Ticker" name="third">
+        <h2>IOTA Price Ticker</h2>
+        <p class="description">
+          Loads data from the shelli.io API - which gets the data from different
+          exchanges and publishes the data in a MAM Stream.
+        </p>
+        <CryptoPriceTracker />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -25,9 +33,10 @@
 <script>
 import InvoiceGenerator from '@/components/InvoiceGenerator'
 import InvoiceVerifier from '@/components/InvoiceVerifier'
+import CryptoPriceTracker from '@/components/CryptoPriceTracker'
 
 export default {
-  components: { InvoiceGenerator, InvoiceVerifier },
+  components: { InvoiceGenerator, InvoiceVerifier, CryptoPriceTracker },
   data() {
     return {
       activeName: 'first'
