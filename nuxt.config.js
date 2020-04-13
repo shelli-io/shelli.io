@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   mode: 'universal',
   /*
@@ -32,7 +34,11 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui', '@/plugins/vue-scrollto.js'],
+  plugins: [
+    '@/plugins/element-ui',
+    '@/plugins/vue-scrollto.js',
+    { src: '~/plugins/paypal.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -64,6 +70,13 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    iotapayUrl:
+      process.env.VUE_APP_SHELLI_IOTAPAY_URL || 'http://localhost:5000',
+    paypalEnv: process.env.PAYPAL_ENV,
+    paypalSandboxId: process.env.PAYPAL_CLIENT_ID_SANDBOX,
+    paypalProductionId: process.env.PAYPAL_CLIENT_ID_PRODUCTION
   },
   generate: {
     dir: 'public'
